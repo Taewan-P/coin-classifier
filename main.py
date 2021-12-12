@@ -117,6 +117,9 @@ class CoinClassifier:
         self.d5.text = f"-Total-\n {self.total}"
 
 
+    def get_total_balance(self):
+        return self.total
+
 async def main():
     bank = CoinClassifier()
 
