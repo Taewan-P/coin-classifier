@@ -10,9 +10,9 @@ bundle = modi.MODI()
 class CoinClassifier:
     def __init__(self):
         # Module Init - CHANGE ORDERS IF NEEDED / IT CHANGES MOSTLY EVERYTIME.
-        self.ir2, self.ir3, self.ir1, self.ir4 = bundle.irs
+        self.ir1, self.ir2, self.ir3, self.ir4 = bundle.irs
         self.motor2, self.motor1 = bundle.motors
-        self.d2, self.d3, self.d1, self.d5, self.d4  = bundle.displays
+        self.d5, self.d1, self.d2, self.d3, self.d4  = bundle.displays
 
         # Balance Init - total: Won, rest: number of coins
         self.total = 0
@@ -22,20 +22,20 @@ class CoinClassifier:
         self.fivehundreds = 0
 
         # Motor location Init
-        self.motor1.second_degree = 72
-        self.motor1.first_degree = 72
-        self.motor2.second_degree = 72
-        self.motor2.first_degree = 72
+        self.motor1.second_degree = 75
+        self.motor1.first_degree = 75
+        self.motor2.second_degree = 75
+        self.motor2.first_degree = 75
         time.sleep(0.4)
-        self.motor1.second_degree = 67
-        self.motor1.first_degree = 67
-        self.motor2.second_degree = 67
-        self.motor2.first_degree = 67
+        self.motor1.second_degree = 60
+        self.motor1.first_degree = 60
+        self.motor2.second_degree = 60
+        self.motor2.first_degree = 60
         time.sleep(0.5)
-        self.motor1.second_degree = 72
-        self.motor1.first_degree = 72
-        self.motor2.second_degree = 72
-        self.motor2.first_degree = 72
+        self.motor1.second_degree = 75
+        self.motor1.first_degree = 75
+        self.motor2.second_degree = 75
+        self.motor2.first_degree = 75
 
         # Display Init
         self.d1.text = f"10's: {self.tens}"
@@ -46,7 +46,7 @@ class CoinClassifier:
 
 
     async def check_for_input(self, period: int) -> list:
-        sensitivity = 50
+        sensitivity = 40
         result = []
         while True:
             print(f"{self.ir4.proximity}   {self.ir3.proximity}   {self.ir2.proximity}    {self.ir1.proximity}")
@@ -54,11 +54,11 @@ class CoinClassifier:
                 print("IR1 (10) Coin Detected")
                 result.append(self.ir1)
 
-            if self.ir2.proximity > 30:
+            if self.ir2.proximity > sensitivity:
                 print("IR2 (50) Coin Detected")
                 result.append(self.ir2)
 
-            if self.ir3.proximity > 40:
+            if self.ir3.proximity > sensitivity:
                 print("IR3 (100) Coin Detected")
                 result.append(self.ir3)
 
@@ -75,41 +75,41 @@ class CoinClassifier:
         if self.ir1 in detected:
             self.tens += 1
             self.total += 10
-            self.motor2.first_degree = 72
+            self.motor2.first_degree = 75
             time.sleep(0.4)
-            self.motor2.first_degree = 67
+            self.motor2.first_degree = 60
             time.sleep(0.5)
-            self.motor2.first_degree = 72
+            self.motor2.first_degree = 75
 
         if self.ir2 in detected:
             self.fifties += 1
             self.total += 50
-            self.motor2.second_degree = 72
+            self.motor2.second_degree = 75
             time.sleep(0.4)
-            self.motor2.second_degree = 67
+            self.motor2.second_degree = 60
             time.sleep(0.5)
-            self.motor2.second_degree = 72
+            self.motor2.second_degree = 75
 
         if self.ir3 in detected:
             self.hundreds += 1
             self.total += 100
-            self.motor1.first_degree = 72
+            self.motor1.first_degree = 75
             time.sleep(0.4)
-            self.motor1.first_degree = 67
+            self.motor1.first_degree = 60
             time.sleep(0.5)
-            self.motor1.first_degree = 72
+            self.motor1.first_degree = 75
 
         if self.ir4 in detected:
             self.fivehundreds += 1
             self.total += 500
-            self.motor1.second_degree = 72
+            self.motor1.second_degree = 75
             time.sleep(0.4)
-            self.motor1.second_degree = 67
+            self.motor1.second_degree = 60
             time.sleep(0.5)
-            self.motor1.second_degree = 72
+            self.motor1.second_degree = 75
 
 
-    def show_balance(self):
+    def show_balance(self) -> None:
         self.d1.text = f"10's: {self.tens}"
         self.d2.text = f"50's: {self.fifties}"
         self.d3.text = f"100's: {self.hundreds}"
@@ -117,7 +117,7 @@ class CoinClassifier:
         self.d5.text = f"-Total-\n {self.total}"
 
 
-    def get_total_balance(self):
+    def get_total_balance(self) -> int:
         return self.total
 
 async def main():
