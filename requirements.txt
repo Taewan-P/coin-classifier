@@ -1,0 +1,14 @@
+bleak==0.8.0
+colour==0.1.5
+importlib-resources==5.4.0
+pymodi==1.1.0
+pyobjc-core==8.1
+pyobjc-framework-Cocoa==8.1
+pyobjc-framework-CoreBluetooth==8.1
+pyobjc-framework-libdispatch==8.1
+PyQt5==5.15.6
+PyQt5-Qt5==5.15.2
+PyQt5-sip==12.9.0
+pyserial==3.5
+tkmacosx==1.0.3
+zipp==3.6.0
